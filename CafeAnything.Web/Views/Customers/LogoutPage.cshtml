@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Logout Page";
+    Layout = "~/Views/CustomerLayout/CustomerLoginLayout.cshtml";
+    if (Session["CustomerID"] == null)
+    {
+        Layout = null;
+        Session.Abandon();
+        Response.Redirect("/Customers/Login");
+    }
+}
+
+@{
+    Session.Abandon();
+}
+
+<head>
+    <meta http-equiv="refresh" content="3;url=/Customers/Login">
+</head>
+
+<div class="form-horizontal">
+    <div class="jumbotron">
+        <img src="~/Content/IMG/CafeAnything.jpg" alt="Cafe Anything" class="img-responsive center-block" width="280" height="150" />
+
+        <h2 class="text-center">Thank you for using</h2>
+        <h2 class="text-center">Cafe Anything</h2>
+
+        <p class="text-center" style="color:blue">Redirecting to Cafe Anything Login Page ... </p>
+    </div>
+</div>
+
+<script language="javascript">
+    history.pushState(null, null, "/Customers/Login");
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, "/Customers/Login");
+    });
+    window.history.forward(1);
+</script>

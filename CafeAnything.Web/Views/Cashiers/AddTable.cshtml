@@ -1,0 +1,94 @@
+﻿@model CafeAnything.DomainModel.Tables
+
+@{
+    ViewBag.Title = "Add Table";
+    Layout = "~/Views/CashierLayout/CashierHomeLayout.cshtml";
+}
+
+<h2>Add Table</h2>
+
+@using (Html.BeginForm("AddTable", "Cashiers", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Table No", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TableNo, new { htmlAttributes = new { @class = "form-control w3-btn w3-white w3-border w3-border-red w3-round-large w3-padding-small" } })
+                @Html.ValidationMessageFor(model => model.TableNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div id="TableNoDuplicate"></div>
+
+        <div class="form-group">
+            @Html.Label("Table Status", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.TStatus, htmlAttributes: new { @class = "form-control w3-btn w3-white w3-border w3-border-red w3-round-large w3-padding-small" })
+                @Html.ValidationMessageFor(model => model.TStatus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.TextBox("AddTable", "Create Table", new { type = "submit", @class = "w3-btn w3-white w3-border w3-border-red w3-round-large test" })
+            </div>
+        </div>
+
+        <div class="text-danger" id="errorMsg">
+            @{
+                if (ViewBag.Error != null)
+                {
+                    <p class="alert alert-danger text-center">@ViewBag.Error</p>
+                }
+            }
+        </div>
+
+        <div style="background-color:#00ff00">
+            @{
+                if (ViewBag.Success != null)
+                {
+                    <p class="text-center">@ViewBag.Success</p>
+                }
+            }
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink(" Tables Page", "Tables", "Cashiers", new { @class = "btn btn-primary btn-sm w3-button w3-aqua w3-round-xlarge w3-border-red glyphicon glyphicon-home" })
+            </div>
+        </div>
+
+    </div>
+}
+
+<script language="javascript" type="text/javascript">
+
+    $(function () {
+
+        $("#TableNo").keyup(function () {
+            var tableno = $("#TableNo").val();
+            $.ajax({
+                type: "POST",
+                url: "/Cashiers/AjaxCreateTable",
+                data: {
+                    TableNo: tableno
+                },
+                success: function (response) {
+                    if (response.Error == true) {
+                        $("#TableNoDuplicate").attr('class', 'alert alert-danger text-center').html(response.TableNoDuplicate);
+                        $(".test").attr("disabled", true);
+                    }
+                    else if (response.Error == false) {
+                        $("#TableNoDuplicate").attr('class', '').html("");
+                        $(".test").attr("disabled", false);
+                    }
+                }
+            })
+        })
+
+    })
+
+</script>

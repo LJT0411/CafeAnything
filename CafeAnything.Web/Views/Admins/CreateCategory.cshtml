@@ -1,0 +1,119 @@
+﻿@model CafeAnything.DomainModel.Categories
+
+@{
+    ViewBag.Title = "Create Category";
+    Layout = "~/Views/AdminLayout/AdminHomeLayout.cshtml";
+}
+
+<h2>Create New Category</h2>
+
+@using (Html.BeginForm("CreateCategory", "Admins", FormMethod.Post , new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.CategoryType, htmlAttributes: new { @class = "form-control w3-btn w3-white w3-border w3-border-red w3-round-large w3-padding-small" })
+                @Html.ValidationMessageFor(model => model.CategoryType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FoodName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FoodName, new { htmlAttributes = new {required="required", @class = "form-control w3-btn w3-white w3-border w3-border-red w3-round-large w3-padding-small" } })
+                @Html.ValidationMessageFor(model => model.FoodName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new {step="0.01" , required="required" , placeholder="RM ", type = "number", @class = "form-control w3-btn w3-white w3-border w3-border-red w3-round-large w3-padding-small" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FoodImg, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="UserPhoto" id="UserPhoto" accept="image/*" onchange="return upload_image()" class="form-control w3-btn w3-white w3-border w3-border-red w3-round-large w3-padding-small" required />
+                @{
+                    if (ViewBag.ImgError != null)
+                    {
+                        <p class="alert alert-danger text-center">@ViewBag.ImgError</p>
+                    }
+                }
+                <br />
+                <div id="before_upload">
+                    <img src="~/Content/IMG/Default.png" width="280" height="150" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.TextBox("CreateCategory", "Create Category", new { type = "submit", @class = "w3-btn w3-white w3-border w3-border-red w3-round-large test" })
+            </div>
+        </div>
+
+        <div class="text-danger" id="errorMsg">
+            @{
+                if (ViewBag.Error != null)
+                {
+                    <p class="alert alert-danger text-center">@ViewBag.Error</p>
+                }
+            }
+        </div>
+
+        <div style="background-color:#00ff00">
+            @{
+                if (ViewBag.Success != null)
+                {
+                    <p class="text-center">@ViewBag.Success</p>
+                }
+            }
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink(" Menu Page", "CategoryMenu", "Admins", new { @class = "btn btn-primary btn-sm w3-button w3-aqua w3-round-xlarge w3-border-red glyphicon glyphicon-home" })
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function upload_image() {
+        var SelectedFile = document.getElementById("UserPhoto");
+        var filePatch = SelectedFile.value;
+        var allowedExtension = /(\.jpg|\.jpeg|\.png)$/i;
+        if (!allowedExtension.exec(filePatch)) {
+            alert('Only accept jpg,png,jpeg. Please upload again.');
+            SelectedFile.value = "";
+            var image = $("#before_upload")
+            image.fadeOut('fast', function () {
+                image.html('<img src="~/Content/IMG/Default.png" style="width:30%/>');
+                image.fadeIn('fast');
+            });
+        }
+        else {
+            if (SelectedFile.files && SelectedFile.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                    var image = $("#before_upload")
+                    image.fadeOut('fast', function () {
+                        image.html('<img src="' + event.target.result + '" style="width:30%"/>');
+                        image.fadeIn('fast');
+                    });
+                };
+                reader.readAsDataURL(SelectedFile.files[0]);
+            }
+        }
+    }
+</script>

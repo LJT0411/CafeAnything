@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CafeAnything.DomainModel.OrderCart>
+
+@{
+    ViewBag.Title = "My Order";
+    Layout = "~/Views/CustomerLayout/CustomerHomeLayout.cshtml";
+}
+
+
+<div class="jumbotron">
+    <h2 style="text-align:center">My Order</h2>
+    <p></p>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Food Name")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayName("Total Amount")
+            </th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categories.FoodName)
+                </td>
+
+                <td style="padding-left:40px">
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+
+                <td style="padding-left:35px">
+                    RM @Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td></td>
+            <td></td>
+
+            <td style="padding-left:35px">
+                RM @ViewBag.TotalAmount
+            </td>
+            <td></td>
+        </tr>
+
+    </table>
+
+    <span>
+        @Html.ActionLink("Confirm Payment", "ConfirmPayment", "", new { @class = "w3-btn w3-white w3-border w3-border-red w3-round-large" })
+    </span>
+
+    <span style="float:right">
+        @Html.ActionLink("Back To Order", "MyOrder", "", new { @class = "w3-btn w3-white w3-border w3-border-red w3-round-large" })
+    </span>
+
+</div>
+
+
+

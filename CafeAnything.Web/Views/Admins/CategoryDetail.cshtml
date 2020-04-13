@@ -1,0 +1,58 @@
+﻿@model CafeAnything.DomainModel.Categories
+
+@{
+    ViewBag.Title = "Category Details";
+    Layout = "~/Views/AdminLayout/AdminHomeLayout.cshtml";
+}
+
+<div>
+    <h2>Category Details</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FoodName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FoodName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+           RM @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FoodImg)
+        </dt>
+
+        <dd>
+            @{
+                var base64 = Convert.ToBase64String(Model.FoodImg);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+            }
+            <img src="@imgsrc" style="max-height : 280px ; max-width:250px;" />
+        </dd>
+
+    </dl>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink(" Menu Page", "CategoryMenu", "Admins", new { @class = "btn btn-primary btn-sm w3-button w3-aqua w3-round-xlarge w3-border-red glyphicon glyphicon-home" })
+        </div>
+    </div>
+
+</div>
+
+

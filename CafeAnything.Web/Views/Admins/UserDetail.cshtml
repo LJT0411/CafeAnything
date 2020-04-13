@@ -1,0 +1,37 @@
+﻿@model CafeAnything.DomainModel.Users
+
+@{
+    ViewBag.Title = "User Detail";
+    Layout = "~/Views/AdminLayout/AdminHomeLayout.cshtml";
+}
+
+<h2>User Detail</h2>
+
+<div class="jumbotron">
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Roles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Roles)
+        </dd>
+
+    </dl>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink(" User Page", "Users", "Admins", new { @class = "btn btn-primary btn-sm w3-button w3-aqua w3-round-xlarge w3-border-red glyphicon glyphicon-home" })
+        </div>
+    </div>
+
+</div>

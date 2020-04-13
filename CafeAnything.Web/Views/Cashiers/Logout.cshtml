@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Logout";
+    Layout = "~/Views/CashierLayout/CashierLoginLayout.cshtml";
+    if (Session["CashierID"] == null)
+    {
+        Layout = null;
+        Session.Abandon();
+        Response.Redirect("/Cashiers/Login");
+    }
+}
+
+@{
+    Response.Redirect("/Cashiers/LogoutPage");
+}
+

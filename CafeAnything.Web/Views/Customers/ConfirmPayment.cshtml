@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Payment Successful";
+    Layout = "~/Views/CustomerLayout/CustomerHomeLayout.cshtml";
+}
+
+<div class="text-success">
+    @{
+        if (ViewBag.Success != null)
+        {
+            <br />
+            <h1 class="alert alert-success text-center">@ViewBag.Success</h1>
+        }
+    }
+</div>

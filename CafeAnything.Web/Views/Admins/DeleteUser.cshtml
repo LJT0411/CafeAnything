@@ -1,0 +1,55 @@
+﻿@model CafeAnything.DomainModel.Users
+
+@{
+    ViewBag.Title = "Delete User";
+    Layout = "~/Views/AdminLayout/AdminHomeLayout.cshtml";
+}
+
+<div class="jumbotron">
+
+    <h2 style="color:red">Are you sure you want to delete this?</h2>
+    <br />
+
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Username)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Username)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Roles)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Roles)
+            </dd>
+
+        </dl>
+
+        @if (ViewBag.CheckRoles == ViewBag.CustomerRole)
+        {
+            <p class="alert alert-danger"><strong>Note : </strong>Selected User which Order will be deleted.</p>
+        }
+
+        @if (ViewBag.CheckRoles == ViewBag.AdminRole || ViewBag.CheckRoles == ViewBag.CashierRole)
+        {
+            <p class="alert alert-danger"><strong>Note : </strong>Selected User will be deleted.</p>
+        }
+
+        @using (Html.BeginForm("DeleteUser", "Admins", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.TextBox("Delete", "Delete User", new { type = "submit", @class = "w3-btn w3-white w3-border w3-border-red w3-round-large" }) |
+                    @Html.ActionLink(" Users Page", "Users", "Admins", new { @class = "btn btn-primary btn-sm w3-button w3-aqua w3-round-xlarge w3-border-red glyphicon glyphicon-home" })
+                </div>
+            </div>
+        }
+    </div>
+</div>

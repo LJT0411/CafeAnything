@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7BACD005-D079-49CE-8F78-7313F2590B7A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CafeAnything.Persistence</RootNamespace>
+    <AssemblyName>CafeAnything.Persistence</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppDbContext.cs" />
+    <Compile Include="Migrations\202004040607568_initail.cs" />
+    <Compile Include="Migrations\202004040607568_initail.Designer.cs">
+      <DependentUpon>202004040607568_initail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004041015379_categories.cs" />
+    <Compile Include="Migrations\202004041015379_categories.Designer.cs">
+      <DependentUpon>202004041015379_categories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004050750545_dessert.cs" />
+    <Compile Include="Migrations\202004050750545_dessert.Designer.cs">
+      <DependentUpon>202004050750545_dessert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004060710424_newModel.cs" />
+    <Compile Include="Migrations\202004060710424_newModel.Designer.cs">
+      <DependentUpon>202004060710424_newModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004060720581_hg.cs" />
+    <Compile Include="Migrations\202004060720581_hg.Designer.cs">
+      <DependentUpon>202004060720581_hg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004061103392_dw.cs" />
+    <Compile Include="Migrations\202004061103392_dw.Designer.cs">
+      <DependentUpon>202004061103392_dw.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004061335047_dwds.cs" />
+    <Compile Include="Migrations\202004061335047_dwds.Designer.cs">
+      <DependentUpon>202004061335047_dwds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004061419218_remove.cs" />
+    <Compile Include="Migrations\202004061419218_remove.Designer.cs">
+      <DependentUpon>202004061419218_remove.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004080759002_zz.cs" />
+    <Compile Include="Migrations\202004080759002_zz.Designer.cs">
+      <DependentUpon>202004080759002_zz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004080940412_zc.cs" />
+    <Compile Include="Migrations\202004080940412_zc.Designer.cs">
+      <DependentUpon>202004080940412_zc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004081303282_nofk.cs" />
+    <Compile Include="Migrations\202004081303282_nofk.Designer.cs">
+      <DependentUpon>202004081303282_nofk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CashierRepository.cs" />
+    <Compile Include="Repositories\CategoryRepository.cs" />
+    <Compile Include="Repositories\OrderCartRepository.cs" />
+    <Compile Include="Repositories\UsersRepository.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CafeAnything.DomainModel\CafeAnything.DomainModel.csproj">
+      <Project>{8AFC2E3C-3F2B-4FE4-A9C2-58987D126449}</Project>
+      <Name>CafeAnything.DomainModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202004040607568_initail.resx">
+      <DependentUpon>202004040607568_initail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004041015379_categories.resx">
+      <DependentUpon>202004041015379_categories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004050750545_dessert.resx">
+      <DependentUpon>202004050750545_dessert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004060710424_newModel.resx">
+      <DependentUpon>202004060710424_newModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004060720581_hg.resx">
+      <DependentUpon>202004060720581_hg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004061103392_dw.resx">
+      <DependentUpon>202004061103392_dw.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004061335047_dwds.resx">
+      <DependentUpon>202004061335047_dwds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004061419218_remove.resx">
+      <DependentUpon>202004061419218_remove.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004080759002_zz.resx">
+      <DependentUpon>202004080759002_zz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004080940412_zc.resx">
+      <DependentUpon>202004080940412_zc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004081303282_nofk.resx">
+      <DependentUpon>202004081303282_nofk.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+</Project>

@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Logout";
+    Layout = "~/Views/CustomerLayout/CustomerLoginLayout.cshtml";
+    if (Session["CustomerID"] == null)
+    {
+        Layout = null;
+        Session.Abandon();
+        Response.Redirect("/Customers/Login");
+    }
+}
+
+@{
+    Response.Redirect("/Customers/LogoutPage");
+}
+

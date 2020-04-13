@@ -1,0 +1,97 @@
+﻿@model IEnumerable<CafeAnything.DomainModel.OrderCart>
+
+@{
+    ViewBag.Title = "My Order";
+    Layout = "~/Views/CustomerLayout/CustomerHomeLayout.cshtml";
+}
+
+<h2>My Order</h2>
+
+@if (Model == null)
+{
+    <div class="text-danger">
+        @{
+            if (ViewBag.Error != null)
+            {
+                <br />
+                <p class="alert alert-danger text-center">@ViewBag.Error</p>
+            }
+        }
+    </div>
+}
+else
+{
+    <span>
+        @Html.ActionLink("Confirm Order", "ConfirmOrder", "", new { @class = "w3-btn w3-white w3-border w3-border-red w3-round-large" })
+    </span>
+
+    <span style="float:right">
+        @Html.ActionLink("Cancel Order", "CancelOrder", "", new { @class = "w3-btn w-white w3-border w3-border-red w3-round-large" })
+    </span>
+
+    <p></p>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Food Name")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayName("Total Amount")
+            </th>
+            <th></th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categories.FoodName)
+                </td>
+
+                <td>
+                    <a href="@Url.Action("PlusOrder", "Customers", new { id = item.CategoryID })" class="w3-btn w3-circle w3-green test">
+                        +
+                    </a>
+
+                    @Html.DisplayFor(modelItem => item.Quantity)
+
+                    <a href="@Url.Action("MinusOrder", "Customers", new { id = item.CategoryID })" class="w3-btn w3-circle w3-green test">
+                        -
+                    </a>
+                </td>
+
+                <td>
+                    RM @Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+
+                <td>
+                    <a href="@Url.Action("DeleteOrder","Customers",new { id = item.CategoryID })" class="del">
+                        x
+                    </a>
+
+                </td>
+
+            </tr>
+        }
+
+        <tr>
+            <td></td>
+            <td></td>
+
+            <td>
+                RM @ViewBag.TotalAmount
+            </td>
+            <td></td>
+        </tr>
+
+    </table>
+}
+
+
+
+

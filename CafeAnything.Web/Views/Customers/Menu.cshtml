@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CafeAnything.DomainModel.Categories>
+
+@{
+    ViewBag.Title = "Menu";
+    Layout = "~/Views/CustomerLayout/CustomerHomeLayout.cshtml";
+}
+
+<h1 style="text-align:center">Menu</h1>
+
+<div class="text-success" id="Effect">
+    @{
+        if (Session["NoTable"] != null)
+        {
+            <br />
+            <p class="alert alert-danger text-center">@Session["NoTable"]</p>
+        }
+        else if (Session["NewOrder"] != null)
+        {
+            <br />
+            <p class="alert alert-success text-center">@Session["NewOrder"]</p>
+        }
+    }
+</div>
+
+<div class="container-fluid bg-3 text-center">
+    @foreach (var item in Model)
+    {
+        var base64 = Convert.ToBase64String(item.FoodImg);
+        var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+        <span class="col-sm-4 Order" style="padding-bottom:3%">
+            <a href="@Url.Action("ClickOrder","Customers",new { id= item.CategoryID })">
+                <img src="@imgsrc" style="max-height : 280px ; max-width:250px; " width="250" height="250" />
+                <span><br />@item.FoodName</span>
+            </a>
+            <br />RM @item.Price
+        </span>
+    }
+
+</div>
+
+<script language="javascript">
+    $("#Effect").click(function () {
+        $("#Effect").fadeOut(2000);
+
+        @if (Session["NewOrder"] != null || Session["NoTable"] != null)
+        {
+            Session.Remove("NewOrder");
+            Session.Remove("NoTable");
+        }
+    })
+</script>

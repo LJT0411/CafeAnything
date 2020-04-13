@@ -1,0 +1,140 @@
+﻿@model CafeAnything.DomainModel.Users
+
+@{
+    ViewBag.Title = "Create User";
+    Layout = "~/Views/AdminLayout/AdminHomeLayout.cshtml";
+}
+
+<h2>Create New User</h2>
+
+
+@using (Html.BeginForm("CreateNewAcc", "Admins", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control w3-btn w3-white w3-border w3-border-red w3-round-large w3-padding-small", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div id="usernameDuplicate"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { type = "password", @class = "form-control w3-btn w3-white w3-border w3-border-red w3-round-large w3-padding-small", required = "required" } })
+                <span onclick="ShowPass()" class="glyphicon glyphicon-eye-open"></span>
+                <br />
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Roles, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Roles, htmlAttributes: new { @class = "form-control w3-btn w3-white w3-border w3-border-red w3-round-large w3-padding-small" })
+                @Html.ValidationMessageFor(model => model.Roles, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.TextBox("CreateAcc", "Create Acc", new { type = "submit", @class = "w3-btn w3-white w3-border w3-border-red w3-round-large test" })
+            </div>
+        </div>
+
+        <div class="text-danger" id="errorMsg">
+            @{
+                if (ViewBag.Error != null)
+                {
+                    <p class="alert alert-danger text-center">@ViewBag.Error</p>
+                }
+            }
+        </div>
+
+        <div style="background-color:#00ff00">
+            @{
+                if (ViewBag.Success != null)
+                {
+                    <p class="text-center">@ViewBag.Success</p>
+                }
+            }
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink(" User Page", "Users", "Admins", new { @class = "btn btn-primary btn-sm w3-button w3-aqua w3-round-xlarge w3-border-red glyphicon glyphicon-home" })
+            </div>
+        </div>
+    </div>
+}
+
+<script language="javascript" type="text/javascript">
+
+    $(function () {
+
+        $("#Username").keyup(function () {
+            var username = $("#Username").val();
+            var roles = $("#Roles").val();
+            $.ajax({
+                type: "POST",
+                url: "/Admins/AjaxCreateUser",
+                data: {
+                    Username: username,
+                    Roles: roles
+                },
+                success: function (response) {
+                    if (response.Error == true) {
+                        $("#usernameDuplicate").attr('class', 'alert alert-danger text-center').html(response.usernameDuplicate);
+                        $(".test").attr("disabled", true);
+                    }
+                    else if (response.Error == false) {
+                        $("#usernameDuplicate").attr('class', '').html("");
+                        $(".test").attr("disabled", false);
+                    }
+                }
+            })
+        })
+
+        $("#Roles").click(function () {
+            var username = $("#Username").val();
+            var roles = $("#Roles").val();
+            $.ajax({
+                type: "POST",
+                url: "/Admins/AjaxCreateUser",
+                data: {
+                    Username: username,
+                    Roles: roles
+                },
+                success: function (response) {
+                    if (response.Error == true) {
+                        $("#usernameDuplicate").attr('class', 'alert alert-danger text-center').html(response.usernameDuplicate);
+                        $(".test").attr("disabled", true);
+                    }
+                    else if (response.Error == false) {
+                        $("#usernameDuplicate").attr('class', '').html("");
+                        $(".test").attr("disabled", false);
+                    }
+                }
+            })
+        })
+    })
+
+    function ShowPass() {
+        var x = document.getElementById('Password');
+
+        if (x.type === "password") {
+            x.type = "text";
+        }
+        else {
+            x.type = "password";
+        }
+    }
+
+</script>

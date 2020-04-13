@@ -1,0 +1,52 @@
+﻿@model CafeAnything.DomainModel.Tables
+
+@{
+    ViewBag.Title = "Table Details";
+    Layout = "~/Views/CashierLayout/CashierHomeLayout.cshtml";
+}
+
+<h2>Table Details</h2>
+
+<div class="jumbotron">
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayName("Table No")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TableNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Table Status")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Total Quantity")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Total Amount")
+        </dt>
+
+        <dd>
+           RM @Html.DisplayFor(model => model.TotalAmount)
+        </dd>
+    </dl>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink(" Tables Page", "Tables", "Cashiers", new { @class = "btn btn-primary btn-sm w3-button w3-aqua w3-round-xlarge w3-border-red glyphicon glyphicon-home" })
+        </div>
+    </div>
+
+</div>

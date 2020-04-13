@@ -1,0 +1,86 @@
+﻿@model CafeAnything.DomainModel.Users
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/AdminLayout/AdminLoginLayout.cshtml";
+}
+
+@{
+    Session.Abandon();
+}
+
+@using (Html.BeginForm("Login", "Admins", FormMethod.Post, new { id = "Login" }))
+{
+    <div class="form-horizontal img-responsive">
+        <div class="jumbotron">
+
+            <img src="~/Content/IMG/CafeAnything.jpg" alt="Cafe Anything" class="img-responsive center-block" width="280" height="150"/>
+
+            <h2 class="text-center">Cafe Anything</h2>
+
+            <div class="form-group" style="margin-left: 26.5%">
+                <h2>Employee Login</h2>
+            </div>
+
+            <div class="form-group" style="margin-left: 21.4%">
+                @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Username", required = "required" } })
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-left: 21.4%">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = "Enter Password", required = "required" } })
+                    <span onclick="ShowPass()" class="glyphicon glyphicon-eye-open" style="margin:10px auto auto 260px"></span>
+                </div>
+            </div>
+
+            <div class="container" style="margin:3% 0 0 35%">
+                <input type="submit" id="Login" value="Login" class="btn btn-primary" style="background-color:green" />
+            </div>
+
+            <div class="text-danger">
+                @{
+                    if (ViewBag.Error != null)
+                    {
+                        <br />
+                        <p class="alert alert-danger text-center">@ViewBag.Error</p>
+                    }
+
+                    if (ViewBag.Locked != null)
+                    {
+                        <br />
+                        <p class="alert alert-danger text-center">@ViewBag.Locked</p>
+                    }
+                }
+            </div>
+
+        </div>
+
+    </div>
+}
+
+<script language="javascript">
+
+    history.pushState(null, null, "/Admins/Login");
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, "/Admins/Login");
+    });
+    window.history.forward(1);
+
+    function ShowPass() {
+        var x = document.getElementById('Password');
+
+        if (x.type === "password") {
+            x.type = "text";
+
+        }
+
+        else {
+            x.type = "password";
+
+        }
+    }
+</script>

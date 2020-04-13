@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CafeAnything.DomainModel.Categories>
+
+@{
+    ViewBag.Title = "Category Menu";
+    Layout = "~/Views/AdminLayout/AdminHomeLayout.cshtml";
+}
+
+<h2>Category Menu</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateCategory", "", new { @class = "w3-btn w3-white w3-border w3-border-red w3-round-large" })
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodName)
+            </td>
+            <td>
+               RM @Html.DisplayFor(modelItem => item.Price)
+            </td>
+
+            <td class="w3-btn w3-aqua w3-border w3-border-red w3-round-large w3-padding-small glyphicon glyphicon-edit" style="margin-top:0.5%">
+                @Html.ActionLink("Edit", "EditCategory", new { id = item.CategoryID })
+            </td>
+
+            <td class="w3-btn w3-aqua w3-border w3-border-red w3-round-large w3-padding-small glyphicon glyphicon-eye-open" style="margin:0.5% 0px 0px 2%">
+                @Html.ActionLink("Details", "CategoryDetail", new { id = item.CategoryID })
+            </td>
+            <td class="w3-btn w3-aqua w3-border w3-border-red w3-round-large w3-padding-small glyphicon glyphicon-trash" style="margin:0.5% 0px 0px 2%">
+                @Html.ActionLink("Delete", "DeleteCategory", new { id = item.CategoryID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="text-danger">
+    @{
+        if (ViewBag.Error != null)
+        {
+            <p class="alert alert-danger text-center">@ViewBag.Error</p>
+        }
+    }
+</div>

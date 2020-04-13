@@ -1,0 +1,79 @@
+﻿@model IEnumerable<CafeAnything.DomainModel.Tables>
+
+@{
+    ViewBag.Title = "Tables";
+    Layout = "~/Views/CashierLayout/CashierHomeLayout.cshtml";
+}
+
+<h2>Tables</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddTable", "", new { @class = "w3-btn w3-white w3-border w3-border-red w3-round-large test" })
+</p>
+
+@if (Model != null)
+{
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayName("Table No")
+            </th>
+            <th>
+                @Html.DisplayName("Table Status")
+            </th>
+            <th>
+                @Html.DisplayName("Table Quantity")
+            </th>
+            <th>
+                @Html.DisplayName("Table Amount")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.TableNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalQuantity)
+                </td>
+                <td>
+                    RM @Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+
+                <td class="w3-btn w3-aqua w3-border w3-border-red w3-round-large w3-padding-small glyphicon glyphicon-edit" style="margin-top:0.5%">
+                    @Html.ActionLink("Edit", "EditTable", new { id = item.TablesID })
+                </td>
+
+                <td class="w3-btn w3-aqua w3-border w3-border-red w3-round-large w3-padding-small glyphicon glyphicon-eye-open" style="margin:0.5% 0px 0px 2%">
+                    @Html.ActionLink("Details", "TableDetail", new { id = item.TablesID })
+                </td>
+
+                <td class="w3-btn w3-aqua w3-border w3-border-red w3-round-large w3-padding-small glyphicon glyphicon-trash" style="margin:0.5% 0px 0px 2%">
+                    @Html.ActionLink("Delete", "DeleteTable", new { id = item.TablesID })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <div class="text-danger">
+        @{
+            if (ViewBag.Error != null)
+            {
+                <br />
+                <p class="alert alert-danger text-center">@ViewBag.Error</p>
+            }
+        }
+    </div>
+}
+

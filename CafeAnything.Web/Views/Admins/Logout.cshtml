@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Logout";
+    Layout = "~/Views/AdminLayout/AdminLoginLayout.cshtml";
+
+    if (Session["AdminID"] == null)
+    {
+        Layout = null;
+        Response.Redirect("/Admins/Login");
+    }
+}
+
+@{
+    Response.Redirect("/Admins/LogoutPage");
+}
+
