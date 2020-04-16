@@ -150,6 +150,12 @@ namespace CafeAnything.Web.Controllers
 
                     EditTable.TableNo = table.TableNo;
                     EditTable.TStatus = table.TStatus;
+                    if (EditTable.TStatus == TStatus.Empty)
+                    {
+                        EditTable.TotalQuantity = 0;
+                        EditTable.TotalAmount = 0;
+                        EditTable.ID = null;
+                    }
                     ViewbagSuccess("Edit Table Successful.");
                     Table.UpdateTable(EditTable);
                     return View(EditTable);
@@ -200,12 +206,8 @@ namespace CafeAnything.Web.Controllers
                 {
                     // If selected table got orders, thn it will remove all orders
                     OrderCart.RemoveRangeOrderCart(checkOrder);
-                    Table.RemoveTable(checkTable);
                 }
-                else
-                {
-                    Table.RemoveTable(checkTable);
-                }
+                Table.RemoveTable(checkTable);
             }
             return RedirectToAction("Tables");
         }
